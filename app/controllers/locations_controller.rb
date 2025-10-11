@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   def index
     @locations = Location.all
+    @skus = Sku.all
   end
 
   def create
@@ -9,6 +10,7 @@ class LocationsController < ApplicationController
       print("Creado correctamente")
     else
       print("No creado")
+    end
   end
 
   private
