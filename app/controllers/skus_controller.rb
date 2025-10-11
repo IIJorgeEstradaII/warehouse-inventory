@@ -1,13 +1,21 @@
 class SkusController < ApplicationController
   def index
     @skus = Sku.all
+    @sku = Sku.new
   end
 
   def create
-    # sku1 = Sku.create(description: "O-ring", part_number: "322212347895", location: "02-32-B5")
-    # sku2 = Sku.new(description: "O-ring", part_number: "322212347895", location: "02-32-B5")
-    # sku2.save
-    @sku = Sku.new(sku_params)
+    @sku = Sku.find_by(part_number: sku_params[:part_number])
+    
+    if @sku
+      @sku.location_ids |= sku_params[:location_ids].reject(&:blank?).map(&:to_i)
+      @sku.qty += sku_params[:qty].to_i #|= sku_params[:qty].to_i + @sku.qty
+      @sku.save
+      @sku.reload
+    else
+      @sku = Sku.new(sku_params)
+    end
+    
     if @sku.save
       print("Creado correctamente")
     else
@@ -18,7 +26,7 @@ class SkusController < ApplicationController
   private
 
   def sku_params
-    params.require(:sku).permit(:description, :part_number, :location)
+    params.require(:sku).permit(:description, :part_number, :qty, location_ids: [])
   end
 
 end

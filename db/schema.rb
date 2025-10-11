@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_06_031204) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_11_043942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -31,10 +31,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_06_031204) do
 
   create_table "skus", force: :cascade do |t|
     t.string "description", null: false
-    t.string "location", null: false
     t.string "part_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "qty", null: false
+    t.check_constraint "qty > 0", name: "qty_non_negative_non_zero"
   end
 
   add_foreign_key "item_locations", "locations"
