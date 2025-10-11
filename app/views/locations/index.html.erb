@@ -1,7 +1,9 @@
 <%@locations.each do |location|%>
 <div>
-  <div><%=location.skus.to_a%></div>
-</div>
+  <div><%location.skus.each do |sku_info|%></div>
+    <%= sku_info.qty %> 
+  </div>
+ <%end%>
 <%end%>
 <div>
   <div> <%= @locations.count %> </div>

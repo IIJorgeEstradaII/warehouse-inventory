@@ -7,7 +7,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -18,11 +17,35 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <header class="bg-gray-800 text-white shadow-md">
+  <div class="container mx-auto flex items-center justify-between p-4">
+    <!-- Logo / Nombre de la App -->
+    <h1 class="text-xl font-bold">Warehouse Inventory</h1>
+
+    <!-- Navegación -->
+    <nav>
+      <ul class="flex space-x-4">
+        <li><a href="/" class="hover:text-gray-300">Inicio</a></li>
+        <li><a href="/skus" class="hover:text-gray-300">SKUs</a></li>
+        <li><a href="/locations" class="hover:text-gray-300">Ubicaciones</a></li>
+        <li><a href="/about" class="hover:text-gray-300">Acerca de</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botón de acción -->
+    <div>
+      <a href="/skus" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+        Añadir SKU
+      </a>
+    </div>
+  </div>
+</header>
     <%= yield %>
   </body>
 </html>
