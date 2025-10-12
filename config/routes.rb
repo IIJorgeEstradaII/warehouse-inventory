@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :item_locations
+  delete "item_locations", to: "item_locations#destroy"
   resources :skus
+  resources :locations
+  root "locations#index"
 
-  get "locations", to: "locations#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

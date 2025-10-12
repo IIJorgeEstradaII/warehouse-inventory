@@ -1,10 +1,22 @@
-<%@locations.each do |location|%>
-<div>
-  <div><%location.skus.each do |sku_info|%></div>
-    <%= sku_info.qty %> 
+<h2 class="font-bold text-lg text-red-700"> UBICACION - DESCRIPCION - NP - CANTIDAD</h2>
+<% @locations.each do |location| %>
+  <%= location.location %> | <!-- o el atributo que identifica la ubicación -->
+  <div class="p-4 border-b border-gray-300">
+
+    <% location.skus.each do |sku_info| %>
+      <div class="ml-4 text-gray-800">
+        <%= sku_info.description %> |
+        <%= sku_info.part_number %> |
+        Cantidad: <%= sku_info.qty %>
+      </div>
+      <%= button_to "Delete", item_locations_path(sku_id: sku_info.id, location_id: location.id),
+    method: :delete,
+    data: { turbo_confirm: "¿Eliminar este SKU solo de esta ubicación?" },
+    class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" %>
+    <% end %>
   </div>
- <%end%>
-<%end%>
-<div>
-  <div> <%= @locations.count %> </div>
+<% end %>
+
+<div class="mt-4 text-sm text-gray-600">
+  Total de ubicaciones: <%= @locations.count %>
 </div>

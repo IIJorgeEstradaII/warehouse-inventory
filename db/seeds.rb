@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-50.times do |i|
+5.times do |i|
   Location.create(
     location: "#{format('%02d', rand(1..50))}-#{format('%02d', rand(1..50))}-#{('A'..'Z').to_a.sample}#{rand(1..9)}"
   )

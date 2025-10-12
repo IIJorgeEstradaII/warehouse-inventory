@@ -17,35 +17,44 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%# <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%# <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <header class="bg-gray-800 text-white shadow-md">
-  <div class="container mx-auto flex items-center justify-between p-4">
-    <!-- Logo / Nombre de la App -->
-    <h1 class="text-xl font-bold">Warehouse Inventory</h1>
+    <header class="bg-gray-900 text-white shadow-lg border-b-4 border-red-600">
+  <div class="container mx-auto flex items-center justify-between px-6 py-4">
+    
+    <!-- Logo / Nombre -->
+    <div class="flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9-9 9-9-9z" />
+      </svg>
+      <h1 class="text-2xl font-semibold tracking-tight">
+        <span class="text-red-500">Rails</span> Warehouse
+      </h1>
+    </div>
 
     <!-- Navegación -->
     <nav>
-      <ul class="flex space-x-4">
-        <li><a href="/" class="hover:text-gray-300">Inicio</a></li>
-        <li><a href="/skus" class="hover:text-gray-300">SKUs</a></li>
-        <li><a href="/locations" class="hover:text-gray-300">Ubicaciones</a></li>
-        <li><a href="/about" class="hover:text-gray-300">Acerca de</a></li>
+      <ul class="flex items-center space-x-6">
+        <li><%= link_to "Inicio", root_path, class: "hover:text-red-400 transition-colors duration-200" %></li>
+        <li><%= link_to "SKUs", skus_path, class: "hover:text-red-400 transition-colors duration-200" %></li>
+        <li><%= link_to "Ubicaciones", locations_path, class: "hover:text-red-400 transition-colors duration-200" %></li>
+        <li><%= link_to "Añadir SKU", new_sku_path, class: "hover:text-red-400 transition-colors duration-200" %></li>
       </ul>
     </nav>
 
     <!-- Botón de acción -->
     <div>
-      <a href="/skus" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-        Añadir SKU
-      </a>
+      <%= link_to "Nuevo SKU", new_sku_path, class: "bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-200" %>
     </div>
+
   </div>
 </header>
+
     <%= yield %>
   </body>
 </html>
